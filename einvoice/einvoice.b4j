@@ -1,0 +1,47 @@
+﻿AppType=StandardJava
+Build1=Default,my.computerise.einvoice.sample
+Group=Default Group
+Library1=b4xcollections
+Library2=jcore
+Library3=xml2map
+Library4=json
+Module1=sample01
+Module2=sample02
+NumberOfFiles=0
+NumberOfLibraries=4
+NumberOfModules=2
+Version=10
+@EndOfDesignText@
+'Non-UI application (console / server application)
+#Region Project Attributes 
+	#CommandLineArgs:
+	#MergeLibraries: True 
+#End Region
+
+Sub Process_Globals
+
+End Sub
+
+Sub AppStart (Args() As String)
+	Test01
+	Test02
+	StartMessageLoop
+End Sub
+
+Public Sub Test01
+	Dim s01 As sample01
+	s01.Initialize
+	Dim data As String = s01.GenerateContent
+	File.WriteString(File.DirApp, "sample01.xml", data)
+	s01.ParseXML(data)
+	Log("sample01.xml created")
+End Sub
+
+Public Sub Test02
+	Dim s02 As sample02
+	s02.Initialize
+	Dim data As String = s02.GenerateContent
+	File.WriteString(File.DirApp, "sample02.json", data)
+	s02.ParseJSON(data)
+	Log("sample02.json created")
+End Sub
